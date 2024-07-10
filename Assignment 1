@@ -1,0 +1,31 @@
+package SeleniumPractise;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class assingment2 {
+
+	public static void main(String[] args) {
+		WebDriver driver =new ChromeDriver();
+		System.setProperty("Webdriver.chrome.driver","D:\\Testing\\chromedriver-win64");
+	//navigate to URL 
+		driver.get("https://www.guru99.com/");
+		WebElement option1=driver.findElement(By.xpath("//*[@id=\"menu-item-3172\"]"));
+		
+		WebElement option2=driver.findElement(By.xpath("//*[@id=\"menu-item-3173\"]/a"));
+		
+		WebElement option3=driver.findElement(By.xpath("//*[@id=\"menu-item-3174\"]/a/span"));
+		
+	
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        
+        Select countryDropdown = new Select(driver.findElement(By.name("country")));
+        countryDropdown.selectByVisibleText("KUWAIT");
+
+  
+	}
+
+}
