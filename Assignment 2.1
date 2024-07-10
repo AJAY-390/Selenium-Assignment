@@ -1,0 +1,45 @@
+package SeleniumPractise;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Webautomation {
+
+	public static void main(String[] args) {
+		
+		WebDriver driver =new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/test/web-table-element.php");
+		
+		// Retrieve all company names from the table
+		
+		List<WebElement> companyElements=driver.findElements(By.xpath("//*[@id=\"leftcontainer\"]/table"));
+		
+		for (WebElement companyElement : companyElements) 
+			{
+            System.out.println(companyElement.getText());
+			}
+		 // Navigate to the login page URL
+		driver.get(" https://demo.guru99.com/test/login.html");
+		
+		WebElement emailInput =driver.findElement(By.name("email"));
+		emailInput.sendKeys("ambekarvaishali60@gmail.com");
+		
+		
+		
+		WebElement passwordInput =driver.findElement(By.name("password"));
+		passwordInput.sendKeys("Vaishali@03");
+		
+		
+		WebElement LoginButton=driver.findElement(By.name("Submit"));
+		LoginButton.clear();
+				
+						
+		
+	}
+
+}
