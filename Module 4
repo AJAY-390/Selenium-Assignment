@@ -1,0 +1,65 @@
+package testngproject;
+
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class ExcelDataLogin {
+    public static void main(String[] args) {
+    
+
+     // Create a new instance of ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Launch the website
+        driver.get("http://demo.guru99.com/V4/");
+
+        try {
+            // Read data from Excel sheet
+            FileInputStream file = new FileInputStream("\\D:\\Testing\\testing datadriven .xlsx");
+            Workbook workbook = WorkbookFactory.create(file);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // Get username and password from Excel sheet
+            Row row = sheet.getRow(0);
+            String username = row.getCell(0).getStringCellValue();
+            String password = row.getCell(1).getStringCellValue();
+
+            // Find username and password fields and enter values
+            WebElement usernameField = driver.findElement(By.name("uid"));
+            WebElement passwordField = driver.findElement(By.name("password"));
+            usernameField.sendKeys(username);
+            passwordField.sendKeys(password);
+
+            // Find and click on login button
+            WebElement loginButton = driver.findElement(By.name("btnLogin"));
+            loginButton.click();
+
+            // Wait for the alert to appear and accept it
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+
+            // Close the browser
+            driver.quit();
+
+            // Close the file input stream
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
