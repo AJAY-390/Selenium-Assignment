@@ -1,0 +1,34 @@
+package seleniumassignments;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class windows2 {
+
+	public static void main(String[] args) {
+		WebDriver driver =new ChromeDriver ();
+		driver.manage().window().maximize();
+		driver.get("https://demo.guru99.com/popup.php");
+		WebElement clickHereLink=driver.findElement(By.xpath("/html/body/p/a"));
+		clickHereLink.click();
+		
+		  // Switch to the new window
+		// Enter email ID
+		WebElement enteremailid=driver.findElement(By.id("emailid"));
+		enteremailid.sendKeys("ambekarvaishali62@gmail.com");
+		
+		WebElement submitbutton=driver.findElement(By.name("btnLogin"));
+		submitbutton.click();
+		
+		driver.close();
+		
+		
+		
+
+		
+		
+	}
+
+}
